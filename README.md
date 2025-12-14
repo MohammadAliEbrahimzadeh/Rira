@@ -1,6 +1,7 @@
 # Rira User Management gRPC Service
 
 A user management service using **gRPC** and **Protocol Buffers** instead of REST.
+
 ## API
 
 All operations use **gRPC + Protocol Buffers**:
@@ -43,7 +44,7 @@ All operations use **gRPC + Protocol Buffers**:
 
 ## Testing
 
-Use [BloomRPC](https://github.com/bloomrpc/bloomrpc) to test the service.
+Use **Postman** or [BloomRPC](https://github.com/bloomrpc/bloomrpc) to test the gRPC service.
 
 ## Sources
 
