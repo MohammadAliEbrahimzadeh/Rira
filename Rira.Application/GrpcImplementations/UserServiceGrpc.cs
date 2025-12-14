@@ -54,6 +54,9 @@ public class UserServiceGrpc : UserService.UserServiceBase
 
     public override async Task<Empty> CreateUser(CreateUserRequest request, ServerCallContext context)
     {
+        if (Convert.ToDateTime(request.BirthDate) > DateTime.Now)
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Birth date cannot be in the future"));
+
         if (!Regex.IsMatch(request.NationalCode, RegexHelper.NationalCodeRegex, RegexOptions.Compiled))
             throw new RpcException(new Status(StatusCode.InvalidArgument, "NationalCode Structure Is Invalid"));
 
@@ -79,6 +82,9 @@ public class UserServiceGrpc : UserService.UserServiceBase
 
     public async override Task<Empty> UpdateUser(UpdateUserRequest request, ServerCallContext context)
     {
+        if (Convert.ToDateTime(request.BirthDate) > DateTime.Now)
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Birth date cannot be in the future"));
+
         if (!Regex.IsMatch(request.FirstName, RegexHelper.NameRegex, RegexOptions.Compiled))
             throw new RpcException(new Status(StatusCode.InvalidArgument, "FirstName Structure Is Invalid"));
 
