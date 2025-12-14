@@ -1,0 +1,67 @@
+﻿syntax = "proto3";
+option csharp_namespace = "Rira.Application";
+package users;
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+// --------------------
+// Services
+// --------------------
+service UserService {
+  rpc GetUserList (GetUserRequestFilter) returns (UserResponse);
+  rpc CreateUser (CreateUserRequest) returns (google.protobuf.Empty);
+  rpc UpdateUser (UpdateUserRequest) returns (google.protobuf.Empty);
+  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty);
+}
+
+// --------------------
+// Requests
+// --------------------
+message GetUserRequestFilter {
+  int64 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string national_code = 4;
+  // Pagination
+  int32 page_num = 5;
+  int32 page_size = 6;
+}
+
+message GetUserByIdRequest {
+  int64 id = 1;
+}
+
+message CreateUserRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string national_code = 3;
+  string birth_date = 4;
+}
+
+message UpdateUserRequest {
+  int64 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string birth_date = 4;
+}
+
+message DeleteUserRequest {
+  int64 id = 1;
+}
+
+// --------------------
+// Responses
+// --------------------
+message UserResponse {
+  repeated UserDto user = 1;
+  int64 TotalCount = 2;
+}
+
+message UserDto {
+  int64 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string national_code = 4;
+  string birth_date = 5;
+  string birth_date_ts = 6;
+}
